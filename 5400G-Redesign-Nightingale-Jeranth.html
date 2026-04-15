@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Rose That Revolutionized The War</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Felipa&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    text-align: center;
+    font-family: "Noto Serif";
+    text-decoration: underline;
+  }
+
+  h3 {
+    text-align: center;
+    font-family: "Noto Serif";
+  }
+
+  p {
+    font-family: "Noto Serif";  
+  }
+
+  body {
+    background-image: linear-gradient(to bottom, rgb(233, 185, 185), rgb(255, 255, 255));
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  /* Hero CSS */
+  .hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-text p {
+    font-size: 0.85rem;
+    color: #6b5c52;
+  }
+  /* Hero CSS */
+
+  /* Hero Scroll Arrow and effect */
+  .scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #000000;
+  }
+
+  .arrow {
+    width: 3px;
+    height: 48px;
+    background: linear-gradient(to bottom, #ee220c, transparent);
+    animation: pulse 1.8s ease infinite;
+  }
+  /* Hero Scroll Arrow and effect */
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+  }
+
+  /* Intro + Nightingale section */
+  .image-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 60px 40px;
+  }
+
+  .image img {
+    width: 800px;
+    height: 580px;
+    display: block;
+    border-radius: 25px;
+  }
+
+  .side-text {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 600px;
+    height: auto;
+  }
+  /* Intro + Nightingale section */
+
+  .side-text p {
+    margin-bottom: 12px;
+  }
+
+  /* Flourish chart */
+  .flourish-container {
+    max-width: 1300px;
+    margin: 80px auto;
+    padding: 30px;
+    background: #f4f4f4;
+    border-radius: 12px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .flourish-embed {
+    margin-bottom: 0 !important;
+  }
+
+  .chart-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+  }
+
+  .chart-wrapper {
+    border-radius: 5px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .chart-description {
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1000px;
+    text-align: left;
+    margin-top: 15px;
+    box-sizing: border-box;
+    font-size: .75rem;
+  }
+  /* Flourish chart */
+
+  /* Hero background circle */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .circle {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(192, 86, 75, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px;
+  background: linear-gradient(135deg, #e8a5a5, #c42e2e, #e39595, #fdfdfd);
+  background-size: 300% 300%;
+  animation: circleGradient 6s ease infinite;
+}
+
+@keyframes circleGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+  /* Hero background circle */
+
+  /* Scroll animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-left.visible,
+  .fade-right.visible,
+  .fade-up.visible {
+    opacity: 1;
+    transform: translate(0);
+  }
+  /* Scroll animations */
+
+
+  /* Line chart Stuff */
+  .linechart {
+    height: 500px;
+    width: 100%;
+  }
+
+  .linechartbg {
+    background-color: #f4f4f4;
+    border-radius: 18px;
+    padding: 36px 44px;
+    max-width: 780px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin: 60px auto;
+  }
+  /* Line chart Stuff */
+
+ 
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .image-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .image img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+    }
+
+    .side-text {
+      max-width: 90%;
+    }
+  /* Responsive */
+
+  }
+</style>
+<!-- Canvas JS Import-->
+<script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<!-- Canvas JS Import-->
+
+</head>
+
+<body>
+
+<!-- HERO/TITLE -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="circle">
+        <h1>The <span style="color: #D94223"><i>Rose</i></span> That Revolutionized The War</h1>
+        <h3>A deep dive into Florence Nightingale's Rose Diagram Data visual</h3>
+      </div>
+    </div>
+    <div class="scroll">
+      <span>SCROLL TO LEARN MORE</span>
+      <div class="arrow"></div>
+    </div>
+  </section>
+<!-- HERO/TITLE -->
+
+<!-- FLORENCE NIGHTINGALE'S ROSE DIAGRAM + INTRODUCTION -->
+  <div class="image-section fade-in">
+    <div class="image fade-left">
+      <img src="https://www.sfu.ca/~shaw/iat355/Assignments/NightingaleRosePlotsLarge.jpg" alt="Nightingale">
+      <p><i style="align-content: center;">Florence Nightingale's Rose Diagram (1854-1856) </i></p>
+    </div>
+    <div class="side-text fade-right">
+      <p>A quick description and history of this data visualization. 
+        This data visualization was developed by Florence Nightingale, who is renowned as the founder of modern nursing. 
+        Florence Nightingale's rose diagram was created during the 19th century when she was a nurse during the Crimean War. 
+        She was the first to notice the key role hygiene played in the spread of diseases that were causing mass casualties during the war.</p>
+      <p>The visualization itself can be broken down into various aspects, one of which showcases the seasonal effects on the mortality rate, 
+        with winter months having the highest number of casualties due to the cold weather preventing wounds and sicknesses from healing.</p>
+      <p>I chose to redesign this visualization because Florence Nightingale created it for a specific group of people: 
+        the king and queen, government officials, and members of the parliament, 
+        who weren't aware that the poor state of the hospital was causing the spread of disease that was killing thousands of men. It took me a lot of reading, watching videos, and staring at the diagram to understand it fully, 
+        so I believed I could redesign it for anyone to be able to look and understand what she was to convey with her visual.</p>
+    </div>
+  </div>
+<!-- FLORENCE NIGHTINGALE'S ROSE DIAGRAM + INTRODUCTION -->
+
+<!-- FLOURISH CHART -->
+  <div class="chart-section fade-in">
+    <div class="chart-wrapper">
+      <div class="flourish-container fade-up">
+        <div class="flourish-embed flourish-chart" data-src="visualisation/27867577">
+          <script src="https://public.flourish.studio/resources/embed.js"></script>
+          <noscript>
+            <img src="https://public.flourish.studio/visualisation/27867577/thumbnail" alt="visualization" />
+          </noscript>
+        </div>
+        <p class="chart-description">
+        <i>This chart shows the causes of mortality during the Crimean War broken down by type (Disease, Wounds, Other). 
+          When clicking on the graph it will compare it to the total casualties recorded in that year.</i>
+      </p>
+      </div>
+      
+    </div>
+  </div>
+<!-- FLOURISH CHART -->
+
+<!-- CANVASJS LINE CHART https://canvasjs.com/javascript-charts/line-chart-zoom-pan/ -->
+  <div class="linechartbg fade-up">
+    <div id="chartContainer" class="linechart"></div>
+    <p class="chart-description">
+        <i>This line chart shows the mortality rates per 1000 soldiers during the Crimean War. As you can see when you hover over the peak,
+            After January 1855, the mortality rates drastically declined as the hospital started improving the sanitary conditions.
+        </i>
+      </p>
+      <p>"Before Nightingale, disease destroyed military campaigns. Hospital barracks overflowed with waste. 
+        Linens returned from the laundry with vermin. Red tape choked the arrival of meager bandage and food supplies. 
+        Dying patients crowded on floors of blood-soaked straw. Dysentery, cholera, and typhus raged mortality rates to levels that exceeded London’s Great Plague." (<a href="https://medium.com/nightingale/florence-nightingale-is-a-design-hero-8bf6e5f2147#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1MDdmNTFhZjJhMTYyNDY3MDc0ODQ2NzRhNDJhZTNjMmI2MjMxOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTgyNDI2MjkzMjM3NzUwOTc5MTEiLCJoZCI6Im9udGFyaW90ZWNodS5uZXQiLCJlbWFpbCI6ImplcmFudGguc295c2FAb250YXJpb3RlY2h1Lm5ldCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJub25jZSI6Im5vdF9wcm92aWRlZCIsIm5iZiI6MTc3MjQ3OTg1NiwibmFtZSI6IkplcmFudGggU295c2EiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlFkLXFCS1c0SmtLdWVPRUQ0eEZkSC1rN004a2lITElpZS03NTY4MU1FWEtyTjR3MD1zOTYtYyIsImdpdmVuX25hbWUiOiJKZXJhbnRoIiwiZmFtaWx5X25hbWUiOiJTb3lzYSIsImlhdCI6MTc3MjQ4MDE1NiwiZXhwIjoxNzcyNDgzNzU2LCJqdGkiOiJkMTlhNDhlZTkzODY4NGQyYWI5N2U1MDEwNjQzOWExOWZhYTg0MDMyIn0.W56K1X6otBowFFCPIDlDluT2xkH1hOq9ReQDgs8ylhh9-AaOIxfPvY3NttvzxCmK4fnhyowHdLok-4vwMsQUzKZivOI83RjUmY6CA6vuRIP8YnPuTaidQ76zcL3krwABarjsMka8KEQGGMxufQVvE-24O707ttztqiyguaMe7UFm4_sOdVlJVLDZjeiZN6PoEY_DPKrz043f_5olcGXbRUYxd1whzvexcUGBdOXs7hOm1Xzg9PETLMc6te6yl1T4DSx2v6YYuDSI2HyZ_vUSzy6fI0mX_Zw_H4R8RTrTTUd2T8TSqNnlDPtQkfwL6ZGiajLNFBl5cKPuMnfg_F5Trw">Andrews 2019</a>).</p>
+  </div>
+<!-- CANVASJS LINE CHART https://canvasjs.com/javascript-charts/line-chart-zoom-pan/ -->
+
+
+<!-- Scroll animation stuff -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in, .fade-left, .fade-right, .fade-up').forEach(el => observer.observe(el));
+  </script>
+<!-- Scroll animation stuff -->
+
+<!-- CanvasJS chart-->
+  <script>
+    window.onload = function () {
+      var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        zoomEnabled: true,
+        padding:{
+        top: 20,
+        right: 30,
+        bottom: 20,
+        left: 30
+        },
+        title: {
+          text: "Crimean War Casualties - Nightingale's Redesign",
+          fontFamily: "Noto Serif",
+          fontWeight: "normal",
+          fontSize: 25,
+          horizontalAlign: "left",
+          padding: 10
+        },
+        axisX: {
+          title: "Months",
+          labelAngle: 0,
+          labelFontFamily: "Noto Serif",
+          titleFontFamily: "Noto Serif",
+          margin: 10
+        },
+        axisY: {
+          title: "Deaths per 1,000",
+          titleFontFamily: "Noto Serif",
+          labelFontFamily: "Noto Serif",
+          gridColor: "#e8e8e8",
+          margin: 10
+          
+        },
+        toolTip: { shared: true },
+        legend: {
+          cursor: "pointer",
+          itemclick: function(e) {
+            e.dataSeries.visible = (e.dataSeries.visible === false) ? true : false;
+            chart.render();
+          }
+        },
+        data: [
+          {
+            type: "line",
+            name: "Disease",
+            showInLegend: true,
+            color: "#7A9BB5",
+            lineThickness: 2,
+            markerSize: 0,
+            dataPoints: [
+              { label: "Apr 1854", y: 1.4 },
+              { label: "May 1854", y: 6.2 },
+              { label: "Jun 1854", y: 4.7 },
+              { label: "Jul 1854", y: 150 },
+              { label: "Aug 1854", y: 328.5 },
+              { label: "Sep 1854", y: 312.2 },
+              { label: "Oct 1854", y: 197 },
+              { label: "Nov 1854", y: 340.6 },
+              { label: "Dec 1854", y: 631.5 },
+              { label: "Jan 1855", y: 1022.8 },
+              { label: "Feb 1855", y: 822.8 },
+              { label: "Mar 1855", y: 480.3 },
+              { label: "Apr 1855", y: 177.5 },
+              { label: "May 1855", y: 171.8 },
+              { label: "Jun 1855", y: 247.6 },
+              { label: "Jul 1855", y: 107.5 },
+              { label: "Aug 1855", y: 129.9 },
+              { label: "Sep 1855", y: 47.5 },
+              { label: "Oct 1855", y: 32.8 },
+              { label: "Nov 1855", y: 56.4 },
+              { label: "Dec 1855", y: 25.3 },
+              { label: "Jan 1856", y: 11.4 },
+              { label: "Feb 1856", y: 6.6 },
+              { label: "Mar 1856", y: 3.9 }
+            ]
+          },
+          {
+            type: "line",
+            name: "Wounds",
+            showInLegend: true,
+            color: "#B55252",
+            lineThickness: 2,
+            markerSize: 0,
+            dataPoints: [
+              { label: "Apr 1854", y: 0 },
+              { label: "May 1854", y: 0 },
+              { label: "Jun 1854", y: 0 },
+              { label: "Jul 1854", y: 0 },
+              { label: "Aug 1854", y: 0.4 },
+              { label: "Sep 1854", y: 32.1 },
+              { label: "Oct 1854", y: 51.7 },
+              { label: "Nov 1854", y: 115.8 },
+              { label: "Dec 1854", y: 41.7 },
+              { label: "Jan 1855", y: 30.7 },
+              { label: "Feb 1855", y: 16.3 },
+              { label: "Mar 1855", y: 12.8 },
+              { label: "Apr 1855", y: 17.9 },
+              { label: "May 1855", y: 16.6 },
+              { label: "Jun 1855", y: 64.5 },
+              { label: "Jul 1855", y: 37.7 },
+              { label: "Aug 1855", y: 44.1 },
+              { label: "Sep 1855", y: 69.4 },
+              { label: "Oct 1855", y: 13.6 },
+              { label: "Nov 1855", y: 10.5 },
+              { label: "Dec 1855", y: 5 },
+              { label: "Jan 1856", y: 0.5 },
+              { label: "Feb 1856", y: 0 },
+              { label: "Mar 1856", y: 0 }
+            ]
+          },
+          {
+            type: "line",
+            name: "Other",
+            showInLegend: true,
+            color: "#3D3D3D",
+            lineThickness: 2,
+            markerSize: 0,
+            dataPoints: [
+              { label: "Apr 1854", y: 7 },
+              { label: "May 1854", y: 4.6 },
+              { label: "Jun 1854", y: 2.5 },
+              { label: "Jul 1854", y: 9.6 },
+              { label: "Aug 1854", y: 11.9 },
+              { label: "Sep 1854", y: 27.7 },
+              { label: "Oct 1854", y: 50.1 },
+              { label: "Nov 1854", y: 42.8 },
+              { label: "Dec 1854", y: 48 },
+              { label: "Jan 1855", y: 120 },
+              { label: "Feb 1855", y: 140.1 },
+              { label: "Mar 1855", y: 68.6 },
+              { label: "Apr 1855", y: 21.2 },
+              { label: "May 1855", y: 12.5 },
+              { label: "Jun 1855", y: 9.6 },
+              { label: "Jul 1855", y: 9.3 },
+              { label: "Aug 1855", y: 6.7 },
+              { label: "Sep 1855", y: 5 },
+              { label: "Oct 1855", y: 4.6 },
+              { label: "Nov 1855", y: 10.1 },
+              { label: "Dec 1855", y: 7.8 },
+              { label: "Jan 1856", y: 13 },
+              { label: "Feb 1856", y: 5.2 },
+              { label: "Mar 1856", y: 9.1 }
+            ]
+          }
+        ]
+      });
+      chart.render();
+    };
+  </script>
+<!-- CanvasJS chart-->
+
+</body>
+</html>
