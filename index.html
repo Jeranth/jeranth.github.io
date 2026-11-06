@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeranth Soysa | Data Analyst Portfolio</title>
+  <meta name="description" content="Jeranth Soysa: M.Sc. Business Analytics and AI student at Ontario Tech University. Data preparation and visualization in Python, Excel, Tableau and Flourish." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep:      #0d1d14;
+      --bg:        #12261b;
+      --panel:     #1a3527;
+      --line:      #2c4c3a;
+      --sage:      #7fbf95;
+      --mist:      #d6e9dc;
+      --muted:     #93ad9d;
+      --rose:      #e3a59c;
+      --disease:   #8fb7c4;
+      --other:     #5f7a6b;
+
+      --font: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --wrap: 1120px;
+      --p: 0; /* hero scroll progress, set by script */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      font-family: var(--font);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      background: var(--deep);
+      color: var(--mist);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--sage); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+    a:hover { color: var(--mist); }
+    :focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; border-radius: 2px; }
+
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: 2rem; }
+
+    .skip {
+      position: absolute; left: 1rem; top: -3rem;
+      background: var(--rose); color: var(--deep); padding: 0.5rem 1rem; z-index: 200;
+    }
+    .skip:focus { top: 1rem; }
+
+    /* ── Header ───────────────────────────── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    header.solid {
+      background: rgba(18, 38, 27, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom-color: var(--line);
+    }
+    .head-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; height: 4rem;
+    }
+    .brand {
+      font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em;
+      color: var(--mist); text-decoration: none;
+      opacity: 0; transform: translateY(-4px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    header.solid .brand { opacity: 1; transform: none; }
+    nav ul { display: flex; gap: 1.75rem; list-style: none; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+    nav a:hover { color: var(--mist); }
+
+    /* ── Landing: full-screen name ────────── */
+    .curtain { position: relative; }
+
+    .landing {
+      position: sticky; top: 0;
+      height: 100vh; height: 100svh;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 55% 60% at 62% 42%, #1f4a32 0%, rgba(31, 74, 50, 0) 70%),
+        radial-gradient(ellipse at 50% 50%, #133022 0%, var(--deep) 75%);
+      z-index: 0;
+    }
+    .rings {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      transform: scale(calc(1 + var(--p) * 0.15));
+      opacity: calc(1 - var(--p) * 0.6);
+    }
+    .rings circle { fill: none; stroke: rgba(127, 191, 149, 0.12); stroke-width: 1; vector-effect: non-scaling-stroke; }
+    .rings circle.dash { stroke-dasharray: 2 6; stroke: rgba(127, 191, 149, 0.18); }
+    .rings .orbit { transform-origin: 744px 378px; animation: spin 140s linear infinite; }
+    .rings .dot { fill: var(--sage); opacity: 0.55; }
+    .rings .dot.rose-dot { fill: var(--rose); opacity: 0.6; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .landing-inner {
+      max-width: none; padding-inline: clamp(1.25rem, 4vw, 4rem);
+      height: 100%;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-block: 5rem clamp(2rem, 6vh, 4rem);
+      transform: translateY(calc(var(--p) * -6vh)) scale(calc(1 - var(--p) * 0.08));
+      transform-origin: 50% 100%;
+      opacity: calc(1 - var(--p) * 0.9);
+      will-change: transform, opacity;
+      position: relative; z-index: 1;
+    }
+    .status {
+      display: inline-flex; align-items: center; gap: 0.55rem; align-self: flex-start;
+      padding: 0.35rem 0.85rem 0.35rem 0.7rem; margin-bottom: clamp(1rem, 3vh, 1.75rem);
+      border: 1px solid rgba(127, 191, 149, 0.3); border-radius: 999px;
+      background: rgba(127, 191, 149, 0.08);
+      font-size: 0.9rem; color: var(--sage);
+    }
+    .status i {
+      width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--sage);
+      box-shadow: 0 0 0 0 rgba(127, 191, 149, 0.6); animation: ping 2.4s ease-out infinite;
+    }
+    @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(127,191,149,0.55); } 80%, 100% { box-shadow: 0 0 0 9px rgba(127,191,149,0); } }
+
+    .landing h1 {
+      font-weight: 900;
+      font-size: min(16vw, 24vh);       /* refined by script to fit the width */
+      line-height: 0.86;
+      letter-spacing: -0.045em;
+      color: var(--mist);
+      margin-left: -0.04em;              /* optical alignment of the J */
+      padding-bottom: 0.1em;             /* room for the descender in "Soysa" */
+    }
+    .landing h1 .line { display: block; white-space: nowrap; width: max-content; }
+    .landing h1 .line + .line { color: var(--sage); }
+
+    .landing-foot {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end;
+      gap: 1.5rem 3rem; margin-top: clamp(1.5rem, 4vh, 2.5rem);
+    }
+    .landing-foot p {
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 300;
+      color: var(--mist); max-width: 34ch; line-height: 1.45;
+    }
+    .cue {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      color: var(--muted); text-decoration: none; font-size: 0.95rem;
+    }
+    .cue:hover { color: var(--mist); }
+    .cue { flex-direction: column; gap: 0.5rem; font-size: 0.85rem; letter-spacing: 0.04em; }
+    .cue .line-cue {
+      width: 1px; height: 44px; transform-origin: top;
+      background: linear-gradient(to bottom, var(--sage), transparent);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.35; transform: scaleY(0.7); } 50% { opacity: 1; transform: scaleY(1); } }
+
+    /* The rest of the page is a sheet that slides up over the name */
+    .sheet {
+      position: relative; z-index: 1;
+      background: var(--bg);
+      border-radius: 28px 28px 0 0;
+      box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.35);
+      border-top: 1px solid var(--line);
+    }
+    .rest { position: relative; z-index: 1; background: var(--bg); }
+
+    @media (max-aspect-ratio: 4/5) {
+      .landing-inner { justify-content: center; transform-origin: 50% 50%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .landing-inner { transform: none; opacity: 1; }
+      .cue .line-cue, .status i, .rings .orbit { animation: none; }
+    }
+
+    /* ── Sections ─────────────────────────── */
+    section.block { padding: 5.5rem 0; border-bottom: 1px solid var(--line); }
+    .block-grid { display: grid; grid-template-columns: 240px 1fr; gap: 3rem; }
+    .block h2 {
+      font-weight: 700; letter-spacing: -0.02em;
+      font-size: 2rem; line-height: 1.15; color: var(--mist);
+      position: sticky; top: 6rem; align-self: start;
+    }
+    .prose p { max-width: 62ch; margin-bottom: 1.1rem; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose .first { font-size: 1.3rem; font-weight: 300; line-height: 1.5; color: var(--mist); }
+
+    .facts {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line);
+    }
+    .facts dt { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.02em; color: var(--sage); line-height: 1.1; }
+    .facts dd { font-size: 0.92rem; color: var(--muted); margin-top: 0.3rem; max-width: 24ch; }
+
+    /* Experience */
+    .jobs { list-style: none; }
+    .job { padding: 0 0 2.5rem; }
+    .job + .job { padding-top: 2.5rem; border-top: 1px solid var(--line); }
+    .job:last-child { padding-bottom: 0; }
+    .job-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 1rem; align-items: baseline; }
+    .job h3, .school h3 { font-size: 1.35rem; font-weight: 500; color: var(--mist); }
+    .when { color: var(--muted); font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+    .where { color: var(--sage); margin: 0.15rem 0 0.9rem; }
+    .job ul { padding-left: 1.1rem; max-width: 66ch; }
+    .job li { margin-bottom: 0.45rem; }
+    .job li::marker { color: var(--sage); }
+
+    /* Projects */
+    .featured { display: grid; gap: 1.5rem; }
+    .feature {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+      padding: 2rem;
+    }
+    .feature.with-chart { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+    .feature h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; color: var(--mist); line-height: 1.2; }
+    .feature .kind { color: var(--rose); font-size: 0.92rem; margin-bottom: 0.4rem; }
+    .feature p { max-width: 60ch; margin-top: 0.75rem; }
+    .feature .tools { color: var(--muted); font-size: 0.92rem; margin-top: 0.9rem; }
+    .btn {
+      display: inline-block; padding: 0.7rem 1.35rem; border-radius: 999px; margin-top: 1.4rem;
+      font-weight: 500; font-size: 0.98rem; text-decoration: none;
+      background: var(--sage); color: var(--deep); border: 1px solid var(--sage);
+    }
+    .btn:hover { background: var(--mist); border-color: var(--mist); color: var(--deep); }
+
+    /* Rose diagram */
+    figure.rose { margin: 0; }
+    .rose svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .wedge { transform-box: view-box; transform-origin: 220px 220px; transition: opacity 0.2s; }
+    .month { cursor: pointer; outline: none; }
+    .month:focus-visible .hit { stroke: var(--rose); stroke-width: 1.5; }
+    .month .hit { fill: transparent; }
+    .rose.dim .month:not(.on) .wedge { opacity: 0.28; }
+    .mlabel { fill: var(--muted); font: 500 10.5px var(--font); }
+    .rose figcaption { margin-top: 0.75rem; font-size: 0.85rem; color: var(--muted); }
+    .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; margin-bottom: 0.4rem; }
+    .legend span { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--mist); }
+    .legend i { width: 0.7rem; height: 0.7rem; border-radius: 2px; display: inline-block; }
+    .readout { min-height: 3em; color: var(--mist); font-variant-numeric: tabular-nums; }
+    .rose .wedge { transform: scale(0); }
+    .rose.bloom .wedge { animation: bloom 0.9s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes bloom { from { transform: scale(0); } to { transform: scale(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      .rose .wedge { transform: none; }
+      .rose.bloom .wedge { animation: none; }
+    }
+
+    .more-h { font-size: 1.2rem; font-weight: 500; color: var(--mist); margin: 3rem 0 0.5rem; }
+    .more { list-style: none; }
+    .more li {
+      display: grid; grid-template-columns: 1fr auto; gap: 0.25rem 2rem;
+      padding: 1.25rem 0; border-bottom: 1px solid var(--line);
+    }
+    .more h4 { font-weight: 500; font-size: 1.05rem; color: var(--mist); }
+    .more p { color: var(--muted); font-size: 0.95rem; max-width: 62ch; grid-column: 1; }
+    .more .links { grid-column: 2; grid-row: 1 / span 2; display: flex; gap: 1rem; align-items: center; font-size: 0.95rem; white-space: nowrap; }
+
+    /* Skills */
+    .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 3rem; }
+    .skills h3 { font-size: 1rem; font-weight: 500; color: var(--sage); margin-bottom: 0.6rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; list-style: none; }
+    .chips li {
+      font-size: 0.92rem; padding: 0.25rem 0.75rem; border-radius: 999px;
+      border: 1px solid var(--line); background: rgba(127, 191, 149, 0.06);
+    }
+    .certs { list-style: none; }
+    .certs li { margin-bottom: 0.4rem; }
+    .certs span { color: var(--muted); }
+
+    /* Education */
+    .school + .school { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+    .school .degree { margin-top: 0.2rem; }
+    .school .detail { color: var(--muted); font-size: 0.95rem; margin-top: 0.4rem; }
+    .gpa { color: var(--rose); font-weight: 500; }
+
+    /* Contact */
+    .contact { padding: 5.5rem 0 4.5rem; }
+    .contact h2 { font-weight: 700; letter-spacing: -0.03em; font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.08; max-width: 18ch; color: var(--mist); }
+    .contact-list { list-style: none; margin-top: 2rem; display: grid; gap: 0.6rem; font-size: 1.1rem; }
+    .contact-list span { display: inline-block; width: 6rem; color: var(--muted); font-size: 0.95rem; }
+    footer { padding: 2rem 0; color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--line); }
+
+    /* ── Responsive ───────────────────────── */
+    @media (max-width: 900px) {
+      .block-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .block h2 { position: static; }
+      .feature.with-chart { grid-template-columns: 1fr; }
+      .feature.with-chart .rose { max-width: 440px; }
+    }
+    @media (max-width: 720px) {
+      .wrap { padding-inline: 1.25rem; }
+      .head-inner { height: auto; padding-block: 0.8rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+      .brand { display: none; }
+      nav { width: 100%; overflow-x: auto; scrollbar-width: none; }
+      nav ul { gap: 1.25rem; }
+      nav a { white-space: nowrap; }
+      .sheet { border-radius: 20px 20px 0 0; }
+      section.block { padding: 3.5rem 0; }
+      .facts { grid-template-columns: 1fr; gap: 1.25rem; }
+      .feature { padding: 1.5rem; }
+      .more li { grid-template-columns: 1fr; }
+      .more .links { grid-column: 1; grid-row: auto; margin-top: 0.4rem; }
+      .skills { grid-template-columns: 1fr; }
+      .contact-list span { display: block; width: auto; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header id="site-header">
+  <div class="wrap head-inner">
+    <a class="brand" href="#top">Jeranth Soysa</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="curtain">
+
+    <!-- Landing -->
+    <section class="landing" id="top">
+      <svg class="rings" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <circle cx="744" cy="378" r="140"/>
+        <circle cx="744" cy="378" r="230" class="dash"/>
+        <circle cx="744" cy="378" r="330"/>
+        <circle cx="744" cy="378" r="450"/>
+        <circle cx="744" cy="378" r="590" class="dash"/>
+        <circle cx="744" cy="378" r="740"/>
+        <circle cx="744" cy="378" r="900"/>
+        <g class="orbit">
+          <circle class="dot" cx="1074" cy="378" r="3.5"/>
+          <circle class="dot rose-dot" cx="744" cy="-72" r="3"/>
+          <circle class="dot" cx="355" cy="603" r="2.5"/>
+          <circle class="dot rose-dot" cx="907" cy="578" r="2.5"/>
+        </g>
+      </svg>
+      <div class="wrap landing-inner" id="landing-inner">
+        <p class="status"><i aria-hidden="true"></i>Open to work</p>
+        <h1 id="name"><span class="line">Jeranth</span><span class="line">Soysa</span></h1>
+        <div class="landing-foot">
+          <p>Data analyst in Toronto, turning raw data into clear reports teams can act on.</p>
+          <a class="cue" href="#about">
+            About me
+            <span class="line-cue" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About: the sheet that slides over the name -->
+    <section class="block sheet" id="about">
+      <div class="wrap block-grid">
+        <h2>About</h2>
+        <div class="prose">
+          <p class="first">I'm an international student from Sri Lanka, completing a Master of Science in Business Analytics and AI at Ontario Tech University.</p>
+          <p>Before that I earned a B.S. in Business Computer Information Systems at the University of North Texas with a 4.0 GPA. During a year-long remote internship at Global Pearl Ventures, I ran statistical analysis in Excel, built dashboards and reports for stakeholders, and hosted the company's web applications on Microsoft Azure.</p>
+          <p>These days I spend most of my time preparing data in Python and Excel and turning it into charts in Flourish and Tableau. I'm looking for a data analyst role where the job is to make data easy for a team to understand and use.</p>
+
+          <dl class="facts">
+            <div><dt>4.0</dt><dd>GPA in Business Computer Information Systems at UNT</dd></div>
+            <div><dt>4</dt><dd>web applications hosted on Azure Linux VMs during my internship</dd></div>
+            <div><dt>90,000+</dt><dd>students reached by the STEMPUMP education platform I helped build</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="rest">
+    <!-- Experience -->
+    <section class="block" id="experience">
+      <div class="wrap block-grid">
+        <h2>Experience</h2>
+        <ol class="jobs">
+          <li class="job">
+            <div class="job-head">
+              <h3>DevOps Intern</h3>
+              <span class="when">June 2025 to June 2026</span>
+            </div>
+            <p class="where">Global Pearl Ventures, remote (USA and Sri Lanka)</p>
+            <ul>
+              <li>Performed statistical analysis in Excel and built charts and dashboards to communicate insights to stakeholders.</li>
+              <li>Prepared clear, concise reports and presentations summarizing results.</li>
+              <li>Set up and configured Linux virtual machines on Microsoft Azure to host four of the organization's web applications.</li>
+              <li>Hosted Dentax, a dental web app with a DICOM viewer for real-time X-rays, patient booking and dental records.</li>
+              <li>Managed multiple tasks and deadlines independently in a fully remote role.</li>
+            </ul>
+          </li>
+          <li class="job">
+            <div class="job-head">
+              <h3>Scanner</h3>
+              <span class="when">August 2023 to June 2024</span>
+            </div>
+            <p class="where">Fairfax (US), Lewisville, Texas</p>
+            <ul>
+              <li>Efficiently scanned and organized diverse tax documents, ensuring accuracy and data integrity.</li>
+              <li>Handled transactions including DoorDash systems and cash registers.</li>
+            </ul>
+          </li>
+          <li class="job">
+            <div class="job-head">
+              <h3>Ice Cream Scooper</h3>
+              <span class="when">March 2022 to August 2022</span>
+            </div>
+            <p class="where">Beth Marie's, Denton, Texas</p>
+            <ul>
+              <li>Processed orders on the POS system and handled cash and DoorDash transactions accurately.</li>
+              <li>Answered customer questions on ingredients and dietary preferences across the full menu.</li>
+            </ul>
+          </li>
+          <li class="job">
+            <div class="job-head">
+              <h3>Front End Developer</h3>
+              <span class="when">June 2020 to August 2021</span>
+            </div>
+            <p class="where">STEMPUMP, remote (United States)</p>
+            <ul>
+              <li>Collaborated with a development team to build the website for an education platform reaching 90,000+ students.</li>
+              <li>Designed the 2020–2021 Microsoft Word course curriculum published on the platform.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="block" id="projects">
+      <div class="wrap block-grid">
+        <h2>Projects</h2>
+        <div>
+          <div class="featured">
+            <article class="feature with-chart">
+              <div>
+                <p class="kind">M.Sc. project</p>
+                <h3>Florence Nightingale Rose Diagram Website</h3>
+                <p>A simple website showcasing a data visualization of Florence Nightingale's rose diagram. I prepared the data in Excel and Jupyter Notebooks, then built the visualization in Flourish.</p>
+                <p class="tools">Excel, Python (Jupyter Notebooks), Flourish</p>
+                <a class="btn" href="5400G-Redesign-Nightingale-Jeranth.html" target="_blank" rel="noopener">Open the website</a>
+              </div>
+
+              <figure class="rose" id="rose">
+                <svg viewBox="0 80 390 380" role="img" aria-labelledby="rose-title">
+                  <title id="rose-title">Rose diagram of deaths in the British army in the East, April 1854 to March 1855, by cause</title>
+                  <g id="rose-g"></g>
+                </svg>
+                <figcaption>
+                  <div class="legend" aria-hidden="true">
+                    <span><i style="background:var(--disease)"></i>Preventable disease</span>
+                    <span><i style="background:var(--rose)"></i>Wounds</span>
+                    <span><i style="background:var(--other)"></i>Other causes</span>
+                  </div>
+                  <p class="readout" id="readout" aria-live="polite">Army deaths in the East, April 1854 to March 1855, redrawn from Nightingale's 1858 diagram. Hover or tab through the months to read the numbers.</p>
+                </figcaption>
+              </figure>
+            </article>
+
+            <article class="feature">
+              <p class="kind">M.Sc. group project</p>
+              <h3>AI for Newcomers in Oshawa: a data story</h3>
+              <p>With my team, I created the data visualizations for a data story on how AI opens up opportunities for newcomers to Oshawa. I prepared and charted the data in Excel, Jupyter Notebooks and Flourish.</p>
+              <p class="tools">Excel, Python (Jupyter Notebooks), Flourish</p>
+            </article>
+          </div>
+
+          <h3 class="more-h">Other coursework</h3>
+          <ul class="more">
+            <li>
+              <h4>Enterprise Analytics and Decision Support: Superstore</h4>
+              <p>An Excel analytics project on a superstore dataset, with pivot analysis, KPI dashboards and decision support across product categories and regions.</p>
+              <div class="links"><a href="MBAI 5100G Individual Project Jeranth Soysa.xlsx" download>Download Excel</a></div>
+            </li>
+            <li>
+              <h4>The Cost of Your Scroll</h4>
+              <p>An infographic on the personal, economic and psychological costs of social media and screen time, written for a general audience.</p>
+              <div class="links"><a href="Assignment 3 - Jeranth Soysa.pdf" target="_blank" rel="noopener">View PDF</a><a href="Assignment 3 - Jeranth Soysa.pdf" download>Download</a></div>
+            </li>
+            <li>
+              <h4>Canada Post strategic analysis</h4>
+              <p>A strategic analysis of Canada Post covering declining mail volumes, e-commerce logistics, labour relations and digital transformation, with recommendations.</p>
+              <div class="links"><a href="Canada-Post-Presentation.pdf" target="_blank" rel="noopener">View PDF</a><a href="Canada-Post-Presentation.pdf" download>Download</a></div>
+            </li>
+            <li>
+              <h4>Deep neural networks and sexual orientation detection: article analysis</h4>
+              <p>A critical presentation on the Stanford study claiming facial images reveal sexual orientation, examining its methods and the ethical and privacy risks of the technology.</p>
+              <div class="links"><a href="DNN_Presentation.pdf" target="_blank" rel="noopener">View PDF</a><a href="DNN_Presentation.pdf" download>Download</a></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="block" id="skills">
+      <div class="wrap block-grid">
+        <h2>Skills</h2>
+        <div class="skills">
+          <div>
+            <h3>Languages</h3>
+            <ul class="chips"><li>Python</li><li>SQL</li><li>C#</li><li>Java</li><li>HTML5</li><li>CSS</li></ul>
+          </div>
+          <div>
+            <h3>Libraries</h3>
+            <ul class="chips"><li>Pandas</li><li>NumPy</li><li>scikit-learn</li></ul>
+          </div>
+          <div>
+            <h3>Analytics and BI</h3>
+            <ul class="chips"><li>Jupyter Notebooks</li><li>Microsoft Excel</li><li>Tableau</li><li>Flourish</li></ul>
+          </div>
+          <div>
+            <h3>Cloud and tools</h3>
+            <ul class="chips"><li>Linux</li><li>Microsoft Azure</li><li>MS Office Suite</li><li>Figma</li><li>Adobe Photoshop</li></ul>
+          </div>
+          <div>
+            <h3>AI-assisted development</h3>
+            <ul class="chips"><li>Claude</li></ul>
+          </div>
+          <div>
+            <h3>Certifications</h3>
+            <ul class="certs">
+              <li>Microsoft Office Specialist <span>(Microsoft, May 2022)</span></li>
+              <li>Responsive Web Design <span>(freeCodeCamp, July 2020)</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="block" id="education">
+      <div class="wrap block-grid">
+        <h2>Education</h2>
+        <div>
+          <div class="school">
+            <div class="job-head">
+              <h3>Ontario Tech University</h3>
+              <span class="when">In progress</span>
+            </div>
+            <p class="degree">Master of Science in Business Analytics and AI, <span class="gpa">3.92 GPA</span></p>
+            <p class="detail">Oshawa, Ontario. Coursework includes regression, classification and hypothesis testing.</p>
+          </div>
+          <div class="school">
+            <div class="job-head">
+              <h3>University of North Texas</h3>
+              <span class="when">May 2024</span>
+            </div>
+            <p class="degree">Bachelor of Science in Business Computer Information Systems, <span class="gpa">4.0 GPA</span></p>
+            <p class="detail">Denton, Texas</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <h2>Hiring a data analyst? I'd like to hear from you.</h2>
+        <ul class="contact-list">
+          <li><span>Email</span><a href="mailto:jeranths@gmail.com">jeranths@gmail.com</a></li>
+          <li><span>Phone</span><a href="tel:+14377844925">(437) 784-4925</a></li>
+          <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/jeranth-soysa-438a93251/" target="_blank" rel="noopener">linkedin.com/in/jeranth-soysa-438a93251</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">© 2026 Jeranth Soysa, Toronto</div>
+    </footer>
+  </div>
+</main>
+
+<script>
+  /* ── Fit the name to the screen width ───────────── */
+  const nameEl = document.getElementById("name");
+  const inner = document.getElementById("landing-inner");
+  function fitName() {
+    const lines = nameEl.querySelectorAll(".line");
+    nameEl.style.fontSize = "100px";
+    const widest = Math.max(...[...lines].map(l => l.getBoundingClientRect().width));
+    const cs = getComputedStyle(inner);
+    const avail = inner.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const byWidth = 100 * (avail * 0.72 / widest);
+    const byHeight = (window.innerHeight * 0.5) / (lines.length * 0.86 + 0.1);
+    nameEl.style.fontSize = Math.min(byWidth, byHeight).toFixed(1) + "px";
+  }
+  fitName();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitName);
+  window.addEventListener("resize", fitName);
+
+  /* ── Scroll: ease the name back as the page slides over it ── */
+  const root = document.documentElement;
+  const header = document.getElementById("site-header");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let ticking = false;
+  function onScroll() {
+    const p = Math.min(Math.max(window.scrollY / window.innerHeight, 0), 1);
+    if (!reduce) root.style.setProperty("--p", p.toFixed(3));
+    header.classList.toggle("solid", p > 0.85);
+    ticking = false;
+  }
+  window.addEventListener("scroll", () => {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+  onScroll();
+
+  /* ── Nightingale rose diagram ───────────────────── */
+  // Deaths by cause, April 1854 – March 1855: [month, disease, wounds, other]
+  const data = [
+    ["April 1854", 1, 0, 5],    ["May 1854", 12, 0, 9],     ["June 1854", 11, 0, 6],
+    ["July 1854", 359, 0, 23],  ["August 1854", 828, 1, 30], ["September 1854", 788, 81, 70],
+    ["October 1854", 503, 132, 128], ["November 1854", 844, 287, 106], ["December 1854", 1725, 114, 131],
+    ["January 1855", 2761, 83, 324], ["February 1855", 2120, 42, 361], ["March 1855", 1205, 32, 172]
+  ];
+  const colours = ["var(--disease)", "var(--rose)", "var(--other)"];
+  const causes = ["preventable disease", "wounds", "other causes"];
+  const C = 220, R = 210, k = R / Math.sqrt(2761);
+  const NS = "http://www.w3.org/2000/svg";
+  const g = document.getElementById("rose-g");
+  const fig = document.getElementById("rose");
+  const readout = document.getElementById("readout");
+  const defaultText = readout.textContent;
+  const fmt = n => n.toLocaleString("en-CA");
+
+  // Start at 9 o'clock and run clockwise, as in the original
+  const pt = (r, a) => [C + r * Math.cos(a), C + r * Math.sin(a)];
+  function wedge(r, a0, a1) {
+    const [x0, y0] = pt(r, a0), [x1, y1] = pt(r, a1);
+    return `M${C},${C}L${x0.toFixed(2)},${y0.toFixed(2)}A${r.toFixed(2)},${r.toFixed(2)} 0 0 1 ${x1.toFixed(2)},${y1.toFixed(2)}Z`;
+  }
+
+  data.forEach(([month, ...vals], i) => {
+    const a0 = Math.PI + i * (Math.PI / 6), a1 = a0 + Math.PI / 6;
+    const grp = document.createElementNS(NS, "g");
+    grp.setAttribute("class", "month");
+    grp.setAttribute("tabindex", "0");
+    const text = `${month}: ${fmt(vals[0])} deaths from ${causes[0]}, ${fmt(vals[1])} from ${causes[1]}, ${fmt(vals[2])} from ${causes[2]}.`;
+    grp.setAttribute("aria-label", text);
+
+    vals.map((v, j) => [v, j]).sort((a, b) => b[0] - a[0]).forEach(([v, j]) => {
+      if (!v) return;
+      const p = document.createElementNS(NS, "path");
+      p.setAttribute("d", wedge(k * Math.sqrt(v), a0, a1));
+      p.setAttribute("fill", colours[j]);
+      p.setAttribute("stroke", "var(--panel)");
+      p.setAttribute("stroke-width", "0.75");
+      p.setAttribute("class", "wedge");
+      p.style.animationDelay = (i * 0.07) + "s";
+      grp.appendChild(p);
+    });
+
+    const hit = document.createElementNS(NS, "path");
+    hit.setAttribute("d", wedge(R, a0, a1));
+    hit.setAttribute("class", "hit");
+    grp.appendChild(hit);
+
+    const rMax = Math.max(k * Math.sqrt(Math.max(...vals)), 34);
+    const [lx, ly] = pt(rMax + 14, (a0 + a1) / 2);
+    const lab = document.createElementNS(NS, "text");
+    lab.setAttribute("x", lx.toFixed(1));
+    lab.setAttribute("y", ly.toFixed(1));
+    lab.setAttribute("text-anchor", "middle");
+    lab.setAttribute("dominant-baseline", "middle");
+    lab.setAttribute("class", "mlabel");
+    lab.setAttribute("aria-hidden", "true");
+    lab.textContent = month.slice(0, 3);
+    grp.appendChild(lab);
+
+    const on = () => { grp.classList.add("on"); fig.classList.add("dim"); readout.textContent = text; };
+    const off = () => { grp.classList.remove("on"); fig.classList.remove("dim"); readout.textContent = defaultText; };
+    grp.addEventListener("mouseenter", on);
+    grp.addEventListener("mouseleave", off);
+    grp.addEventListener("focus", on);
+    grp.addEventListener("blur", off);
+    g.appendChild(grp);
+  });
+
+  // Bloom the chart the first time it scrolls into view
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) { fig.classList.add("bloom"); io.disconnect(); }
+    }, { threshold: 0.35 });
+    io.observe(fig);
+  } else {
+    fig.classList.add("bloom");
+  }
+</script>
+</body>
+</html>
